@@ -1,249 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Mon Sport">
+  <meta name="theme-color" content="#F2F3F7">
+  <title>Mon Sport</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-<style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  :root{
-    --bg:#F2F3F7;
-    --bg2:#E4E6F0;
-    --bg3:#D0D4E8;
-    --text:#181C2E;
-    --text2:#6A7090;
-    --text3:#9AA0BC;
-    --yoga:#5B6EC4;
-    --pilates:#E2725B;
-    --velo:#4DAF8A;
-    --accent:#5B6EC4;
-    --glass:rgba(255,255,255,0.75);
-    --glass-border:rgba(190,195,216,0.55);
-    --glass-card:rgba(255,255,255,0.82);
-    --card-border:rgba(190,195,216,0.4);
-    --shadow:0 2px 20px rgba(91,110,196,0.07);
-  }
-  body{font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,sans-serif;}
-  .dash{
-    background:linear-gradient(145deg,#EEF0F8 0%,#F5F3FA 40%,#EDF4F1 100%);
-    min-height:100vh;padding:24px 18px 48px;color:var(--text);
-  }
+    :root {
+      --bg: #F2F3F7;
+      --bg2: #E4E6F0;
+      --bg3: #D0D4E8;
+      --text: #181C2E;
+      --text2: #6A7090;
+      --text3: #9AA0BC;
+      --yoga: #5B6EC4;
+      --pilates: #E2725B;
+      --velo: #4DAF8A;
+      --accent: #5B6EC4;
+      --glass: rgba(255,255,255,0.78);
+      --glass-border: rgba(190,195,216,0.5);
+      --shadow: 0 2px 24px rgba(91,110,196,0.08);
+    }
 
-  /* glass util */
-  .glass{
-    background:var(--glass-card);
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-    border:1px solid var(--card-border);
-    border-radius:20px;
-    box-shadow:var(--shadow);
-  }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: -apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      overscroll-behavior: none;
+    }
 
-  /* ===== HEADER ===== */
-  .header{
-    background:var(--glass);
-    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-    border:1px solid var(--glass-border);
-    border-radius:24px;
-    box-shadow:var(--shadow);
-    padding:18px 20px;
-    display:flex;align-items:center;gap:16px;
-    margin-bottom:20px;
-  }
-  .ring-wrap{position:relative;width:60px;height:60px;flex-shrink:0;}
-  .ring-wrap svg{width:60px;height:60px;transform:rotate(-90deg);}
-  .ring-bg{fill:none;stroke:rgba(91,110,196,0.12);stroke-width:5;}
-  .ring-fill{fill:none;stroke-width:5;stroke-linecap:round;stroke-dasharray:158;stroke-dashoffset:95;stroke:url(#rg);}
-  .ring-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;}
-  .h-text{flex:1;min-width:0;}
-  .h-greeting{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;}
-  .h-title{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-top:2px;line-height:1.2;}
-  .h-sub{font-size:11px;color:var(--text2);margin-top:3px;}
-  .h-add{
-    width:38px;height:38px;border-radius:50%;
-    background:var(--accent);color:#fff;
-    border:none;font-size:22px;font-weight:300;
-    cursor:pointer;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;
-    transition:transform 0.2s,opacity 0.2s;
-    box-shadow:0 4px 14px rgba(91,110,196,0.35);
-  }
-  .h-add:hover{transform:scale(1.1);}
+    body {
+      background: linear-gradient(145deg, #EEF0F8 0%, #F5F3FA 45%, #EDF4F1 100%);
+      min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
 
-  /* ===== TABS ===== */
-  .tabs{display:flex;gap:6px;margin-bottom:18px;}
-  .tab{
-    padding:7px 16px;border-radius:50px;
-    border:1px solid var(--card-border);
-    background:var(--glass-card);
-    font-size:12px;font-weight:600;color:var(--text2);
-    cursor:pointer;transition:all 0.18s;
-  }
-  .tab.active{background:var(--text);color:#fff;border-color:var(--text);}
+    .dash {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 52px 16px 40px;
+    }
 
-  /* ===== SECTION LABEL ===== */
-  .sec-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+    /* ===== GLASS UTIL ===== */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
 
-  /* ===== OBJECTIFS ===== */
-  .goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
-  .goal-card{
-    padding:14px 12px;border-radius:18px;
-    background:var(--glass-card);
-    border:1px solid var(--card-border);
-    box-shadow:var(--shadow);
-  }
-  .goal-emoji{font-size:20px;margin-bottom:6px;display:block;}
-  .goal-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);}
-  .goal-val{font-size:20px;font-weight:800;color:var(--text);margin:3px 0 8px;}
-  .pbar-bg{height:4px;border-radius:10px;background:var(--bg2);}
-  .pbar-fill{height:100%;border-radius:10px;transition:width 0.9s ease;}
-  .fill-yoga{background:var(--yoga);}
-  .fill-pilates{background:var(--pilates);}
-  .fill-velo{background:var(--velo);}
+    /* ===== HEADER ===== */
+    .header {
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
 
-  /* ===== STREAK ===== */
-  .streak-card{
-    padding:16px 18px;display:flex;align-items:center;gap:16px;
-    margin-bottom:20px;
-  }
-  .s-fire{font-size:40px;line-height:1;filter:drop-shadow(0 2px 8px rgba(255,160,60,0.3));}
-  .s-info{flex:1;}
-  .s-num{font-size:34px;font-weight:900;letter-spacing:-1px;color:var(--text);}
-  .s-sub{font-size:12px;color:var(--text2);margin-top:1px;}
-  .s-days{display:flex;gap:5px;}
-  .s-day{
-    width:30px;height:30px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:10px;font-weight:700;
-  }
-  .s-day.done{background:var(--accent);color:#fff;}
-  .s-day.today{background:rgba(91,110,196,0.18);color:var(--accent);border:1.5px solid var(--accent);}
-  .s-day.empty{background:var(--bg2);color:var(--text3);}
+    .ring-wrap { position: relative; width: 62px; height: 62px; flex-shrink: 0; }
+    .ring-wrap svg { width: 62px; height: 62px; transform: rotate(-90deg); }
+    .ring-bg { fill: none; stroke: rgba(91,110,196,0.12); stroke-width: 5; }
+    .ring-fill {
+      fill: none; stroke-width: 5; stroke-linecap: round;
+      stroke-dasharray: 164; stroke-dashoffset: 100;
+      stroke: url(#rg);
+      transition: stroke-dashoffset 1s ease;
+    }
+    .ring-icon {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
 
-  /* ===== STATS ===== */
-  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
-  .stat-card{padding:16px 12px;text-align:center;}
-  .stat-val{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--text);}
-  .stat-lbl{font-size:11px;color:var(--text2);margin-top:3px;font-weight:600;}
+    .h-text { flex: 1; min-width: 0; }
+    .h-greeting { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+    .h-title { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; margin-top: 3px; line-height: 1.2; }
+    .h-sub { font-size: 11px; color: var(--text2); margin-top: 3px; }
 
-  /* ===== CHART ===== */
-  .chart-card{padding:18px;margin-bottom:20px;}
-  .chart-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-  .chart-title{font-size:14px;font-weight:700;color:var(--text);}
-  .legend{display:flex;gap:12px;}
-  .leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2);font-weight:500;}
-  .leg-dot{width:8px;height:8px;border-radius:50%;}
+    .h-add {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      border: none; font-size: 24px; font-weight: 300;
+      cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(91,110,196,0.35);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .h-add:active { transform: scale(0.93); opacity: 0.85; }
 
-  /* ===== SÉANCES ===== */
-  .sessions-card{padding:0;overflow:hidden;margin-bottom:20px;}
-  .sessions-head{padding:16px 18px 10px;display:flex;justify-content:space-between;align-items:center;}
-  .sessions-title{font-size:14px;font-weight:700;color:var(--text);}
-  .sessions-more{font-size:12px;color:var(--text3);font-weight:500;}
-  .s-item{display:flex;align-items:center;gap:12px;padding:11px 18px;border-top:1px solid rgba(190,195,216,0.25);transition:background 0.15s;cursor:default;}
-  .s-item:hover{background:rgba(91,110,196,0.04);}
-  .s-badge{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-  .b-yoga{background:rgba(91,110,196,0.12);}
-  .b-pilates{background:rgba(226,114,91,0.12);}
-  .b-velo{background:rgba(77,175,138,0.12);}
-  .s-name{font-size:13px;font-weight:700;color:var(--text);}
-  .s-meta{font-size:11px;color:var(--text2);margin-top:1px;}
-  .s-right{text-align:right;margin-left:auto;}
-  .s-dur{font-size:13px;font-weight:700;color:var(--text);}
-  .i-dots{display:flex;gap:3px;justify-content:flex-end;margin-top:4px;}
-  .i-dot{width:5px;height:5px;border-radius:50%;background:var(--bg3);}
-  .i-dot.on-yoga{background:var(--yoga);}
-  .i-dot.on-pilates{background:var(--pilates);}
-  .i-dot.on-velo{background:var(--velo);}
+    /* ===== TABS ===== */
+    .tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+    .tab {
+      padding: 8px 16px; border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      font-size: 13px; font-weight: 600; color: var(--text2);
+      cursor: pointer; transition: all 0.18s;
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .tab.active { background: var(--text); color: #fff; border-color: var(--text); }
 
-  /* ===== MODAL ===== */
-  .modal-wrap{
-    display:none;position:fixed;inset:0;
-    background:rgba(24,28,46,0.3);backdrop-filter:blur(8px);
-    z-index:200;align-items:flex-end;justify-content:center;
-  }
-  .modal-wrap.open{display:flex;}
-  .modal{
-    background:rgba(242,243,247,0.97);
-    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-    border:1px solid var(--glass-border);
-    border-radius:28px 28px 0 0;
-    padding:24px 20px 40px;
-    width:100%;max-width:600px;
-    animation:slideUp 0.28s cubic-bezier(.22,.61,.36,1);
-  }
-  @keyframes slideUp{from{transform:translateY(100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
-  .modal-handle{width:36px;height:4px;border-radius:2px;background:var(--bg3);margin:0 auto 18px;}
-  .modal-title{font-size:19px;font-weight:800;color:var(--text);text-align:center;margin-bottom:18px;}
-  .f-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text2);display:block;margin-bottom:6px;}
-  .f-group{margin-bottom:14px;}
-  .act-pills{display:flex;gap:7px;}
-  .act-pill{
-    flex:1;padding:10px 6px;border-radius:12px;text-align:center;
-    font-size:12px;font-weight:700;cursor:pointer;
-    border:1.5px solid var(--bg3);background:var(--bg2);color:var(--text2);
-    transition:all 0.18s;
-  }
-  .act-pill.sel-yoga{background:rgba(91,110,196,0.12);border-color:var(--yoga);color:var(--yoga);}
-  .act-pill.sel-pilates{background:rgba(226,114,91,0.12);border-color:var(--pilates);color:var(--pilates);}
-  .act-pill.sel-velo{background:rgba(77,175,138,0.12);border-color:var(--velo);color:var(--velo);}
-  .f-input{
-    width:100%;padding:11px 13px;border-radius:11px;
-    border:1px solid var(--bg3);background:rgba(255,255,255,0.8);
-    color:var(--text);font-size:13px;font-family:inherit;
-  }
-  .f-input:focus{outline:none;border-color:var(--accent);}
-  .int-row{display:flex;gap:6px;}
-  .int-btn{
-    flex:1;padding:9px 4px;border-radius:10px;
-    border:1.5px solid var(--bg3);background:var(--bg2);
-    font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;
-    text-align:center;transition:all 0.15s;font-family:inherit;
-  }
-  .int-btn.active{background:rgba(91,110,196,0.12);border-color:var(--accent);color:var(--accent);}
-  .res-row{display:flex;gap:6px;}
-  .res-btn{
-    flex:1;padding:9px 4px;border-radius:10px;text-align:center;
-    border:1.5px solid var(--bg3);background:var(--bg2);
-    cursor:pointer;transition:all 0.15s;font-size:19px;
-  }
-  .res-btn.active{border-color:var(--accent);background:rgba(91,110,196,0.1);}
-  .res-lbl{display:block;font-size:9px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;}
-  .save-btn{
-    width:100%;padding:14px;border-radius:14px;border:none;
-    background:var(--accent);color:#fff;
-    font-size:15px;font-weight:800;cursor:pointer;
-    font-family:inherit;margin-top:4px;
-    box-shadow:0 6px 20px rgba(91,110,196,0.3);
-    transition:opacity 0.2s,transform 0.2s;
-  }
-  .save-btn:hover{opacity:0.88;transform:scale(1.01);}
-  .strava-btn{
-    width:100%;padding:11px;border-radius:12px;
-    border:1.5px solid rgba(252,100,45,0.35);background:rgba(252,100,45,0.08);
-    color:#E05020;font-size:13px;font-weight:700;cursor:pointer;
-    font-family:inherit;margin-top:8px;transition:background 0.2s;
-  }
-  .strava-btn:hover{background:rgba(252,100,45,0.16);}
-  .cancel{display:block;text-align:center;margin-top:12px;color:var(--text2);font-size:13px;cursor:pointer;}
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-</style>
+    /* ===== SECTION LABEL ===== */
+    .sec-label {
+      font-size: 11px; font-weight: 700; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    /* ===== OBJECTIFS ===== */
+    .goals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .goal-card {
+      padding: 14px 12px; border-radius: 18px;
+      background: var(--glass);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+    }
+    .goal-emoji { font-size: 20px; margin-bottom: 6px; display: block; }
+    .goal-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text2); }
+    .goal-val { font-size: 20px; font-weight: 800; color: var(--text); margin: 3px 0 8px; }
+    .pbar-bg { height: 4px; border-radius: 10px; background: var(--bg2); }
+    .pbar-fill { height: 100%; border-radius: 10px; transition: width 0.9s ease; }
+    .fill-yoga { background: var(--yoga); }
+    .fill-pilates { background: var(--pilates); }
+    .fill-velo { background: var(--velo); }
+
+    /* ===== STREAK ===== */
+    .streak-card {
+      padding: 16px 18px; display: flex; align-items: center; gap: 16px;
+      margin-bottom: 20px;
+    }
+    .s-fire { font-size: 42px; line-height: 1; }
+    .s-info { flex: 1; }
+    .s-num { font-size: 36px; font-weight: 900; letter-spacing: -1px; color: var(--text); }
+    .s-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
+    .s-days { display: flex; gap: 5px; }
+    .s-day {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+    }
+    .s-day.done { background: var(--accent); color: #fff; }
+    .s-day.today { background: rgba(91,110,196,0.15); color: var(--accent); border: 1.5px solid var(--accent); }
+    .s-day.empty { background: var(--bg2); color: var(--text3); }
+
+    /* ===== STATS ===== */
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stat-card { padding: 16px 12px; text-align: center; }
+    .stat-val { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
+    .stat-lbl { font-size: 11px; color: var(--text2); margin-top: 3px; font-weight: 600; }
+
+    /* ===== CHART ===== */
+    .chart-card { padding: 18px; margin-bottom: 20px; }
+    .chart-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+    .chart-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .legend { display: flex; gap: 12px; flex-wrap: wrap; }
+    .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); font-weight: 500; }
+    .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ===== SÉANCES ===== */
+    .sessions-card { padding: 0; overflow: hidden; margin-bottom: 24px; }
+    .sessions-head { padding: 16px 18px 10px; display: flex; justify-content: space-between; align-items: center; }
+    .sessions-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .sessions-more { font-size: 12px; color: var(--text3); font-weight: 500; cursor: pointer; }
+    .s-item {
+      display: flex; align-items: center; gap: 12px; padding: 11px 18px;
+      border-top: 1px solid rgba(190,195,216,0.25);
+      transition: background 0.15s;
+    }
+    .s-item:active { background: rgba(91,110,196,0.05); }
+    .s-badge { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .b-yoga { background: rgba(91,110,196,0.12); }
+    .b-pilates { background: rgba(226,114,91,0.12); }
+    .b-velo { background: rgba(77,175,138,0.12); }
+    .s-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .s-meta { font-size: 11px; color: var(--text2); margin-top: 2px; }
+    .s-right { text-align: right; margin-left: auto; }
+    .s-dur { font-size: 13px; font-weight: 700; color: var(--text); }
+    .i-dots { display: flex; gap: 3px; justify-content: flex-end; margin-top: 4px; }
+    .i-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bg3); }
+    .i-dot.on-yoga { background: var(--yoga); }
+    .i-dot.on-pilates { background: var(--pilates); }
+    .i-dot.on-velo { background: var(--velo); }
+
+    /* ===== MODAL ===== */
+    .modal-wrap {
+      display: none; position: fixed; inset: 0;
+      background: rgba(24,28,46,0.28);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      z-index: 999;
+      align-items: flex-end; justify-content: center;
+    }
+    .modal-wrap.open { display: flex; }
+
+    .modal {
+      background: rgba(242,243,247,0.97);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px 28px 0 0;
+      padding: 20px 18px calc(28px + env(safe-area-inset-bottom));
+      width: 100%; max-width: 480px;
+      animation: slideUp 0.3s cubic-bezier(.22,.61,.36,1);
+      max-height: 92vh; overflow-y: auto;
+    }
+    @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .modal-handle { width: 36px; height: 4px; border-radius: 2px; background: var(--bg3); margin: 0 auto 18px; }
+    .modal-title { font-size: 20px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 18px; }
+
+    .f-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text2); display: block; margin-bottom: 7px; }
+    .f-group { margin-bottom: 14px; }
+
+    .act-pills { display: flex; gap: 8px; }
+    .act-pill {
+      flex: 1; padding: 11px 6px; border-radius: 13px; text-align: center;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      border: 1.5px solid var(--bg3); background: var(--bg2); color: var(--text2);
+      transition: all 0.18s;
+    }
+    .act-pill.sel-yoga { background: rgba(91,110,196,0.12); border-color: var(--yoga); color: var(--yoga); }
+    .act-pill.sel-pilates { background: rgba(226,114,91,0.12); border-color: var(--pilates); color: var(--pilates); }
+    .act-pill.sel-velo { background: rgba(77,175,138,0.12); border-color: var(--velo); color: var(--velo); }
+
+    .f-input {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--bg3); background: rgba(255,255,255,0.85);
+      color: var(--text); font-size: 14px; font-family: inherit;
+      -webkit-appearance: none;
+    }
+    .f-input:focus { outline: none; border-color: var(--accent); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .int-row { display: flex; gap: 6px; }
+    .int-btn {
+      flex: 1; padding: 10px 4px; border-radius: 11px;
+      border: 1.5px solid var(--bg3); background: var(--bg2);
+      font-size: 12px; font-weight: 700; color: var(--text2);
+      cursor: pointer; text-align: center; transition: all 0.15s; font-family: inherit;
+    }
+    .int-btn.active { background: rgba(91,110,196,0.12); border-color: var(--accent); color: var(--accent); }
+
+    .res-row { display: flex; gap: 6px; }
+    .res-btn {
+      flex: 1; padding: 10px 4px; border-radius: 11px; text-align: center;
+      border: 1.5px solid var(--bg3); background: var(--bg2);
+      cursor: pointer; transition: all 0.15s; font-size: 20px;
+    }
+    .res-btn.active { border-color: var(--accent); background: rgba(91,110,196,0.1); }
+    .res-lbl { display: block; font-size: 9px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+
+    .save-btn {
+      width: 100%; padding: 15px; border-radius: 14px; border: none;
+      background: var(--accent); color: #fff;
+      font-size: 16px; font-weight: 800; cursor: pointer; font-family: inherit;
+      margin-top: 6px;
+      box-shadow: 0 6px 20px rgba(91,110,196,0.3);
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .save-btn:active { opacity: 0.85; transform: scale(0.98); }
+
+    .strava-btn {
+      width: 100%; padding: 12px; border-radius: 13px;
+      border: 1.5px solid rgba(252,100,45,0.35); background: rgba(252,100,45,0.08);
+      color: #D04010; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .strava-btn:active { background: rgba(252,100,45,0.18); }
+
+    .cancel-link {
+      display: block; text-align: center; margin-top: 14px;
+      color: var(--text2); font-size: 14px; cursor: pointer; padding: 6px;
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; bottom: calc(24px + env(safe-area-inset-bottom));
+      left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--text); color: #fff;
+      padding: 12px 22px; border-radius: 50px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0; white-space: nowrap; z-index: 9999;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ===== EMPTY STATE ===== */
+    .empty { padding: 20px; text-align: center; color: var(--text3); font-size: 13px; }
+  </style>
+</head>
+<body>
 
 <div class="dash">
-  <h2 style="position:absolute;left:-9999px">Dashboard sport — yoga pilates vélo</h2>
 
   <!-- HEADER -->
   <div class="header">
     <div class="ring-wrap">
-      <svg viewBox="0 0 60 60">
+      <svg viewBox="0 0 62 62">
         <defs>
           <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#5B6EC4"/>
             <stop offset="100%" stop-color="#4DAF8A"/>
           </linearGradient>
         </defs>
-        <circle class="ring-bg" cx="30" cy="30" r="25"/>
-        <circle class="ring-fill" cx="30" cy="30" r="25" id="mainRing"/>
+        <circle class="ring-bg" cx="31" cy="31" r="26"/>
+        <circle class="ring-fill" cx="31" cy="31" r="26" id="mainRing"/>
       </svg>
       <div class="ring-icon">🔥</div>
     </div>
     <div class="h-text">
-      <div class="h-greeting" id="hDate">Mercredi 27 mai</div>
-      <div class="h-title" id="hTitle">2 séances cette semaine</div>
-      <div class="h-sub" id="hSub">Objectif 5 · 40% accompli</div>
+      <div class="h-greeting" id="hDate"></div>
+      <div class="h-title" id="hTitle">Chargement...</div>
+      <div class="h-sub" id="hSub"></div>
     </div>
     <button class="h-add" onclick="openModal()" aria-label="Ajouter une séance">+</button>
   </div>
@@ -261,19 +346,19 @@
     <div class="goal-card">
       <span class="goal-emoji">🧘</span>
       <div class="goal-lbl">Yoga</div>
-      <div class="goal-val" id="gYoga">1 / 1</div>
-      <div class="pbar-bg"><div class="pbar-fill fill-yoga" id="pbYoga" style="width:100%"></div></div>
+      <div class="goal-val" id="gYoga">— / 1</div>
+      <div class="pbar-bg"><div class="pbar-fill fill-yoga" id="pbYoga" style="width:0%"></div></div>
     </div>
     <div class="goal-card">
       <span class="goal-emoji">🤸</span>
       <div class="goal-lbl">Pilates</div>
-      <div class="goal-val" id="gPilates">1 / 2</div>
-      <div class="pbar-bg"><div class="pbar-fill fill-pilates" id="pbPilates" style="width:50%"></div></div>
+      <div class="goal-val" id="gPilates">— / 2</div>
+      <div class="pbar-bg"><div class="pbar-fill fill-pilates" id="pbPilates" style="width:0%"></div></div>
     </div>
     <div class="goal-card">
       <span class="goal-emoji">🚴</span>
       <div class="goal-lbl">Vélo</div>
-      <div class="goal-val" id="gVelo">0 / 2</div>
+      <div class="goal-val" id="gVelo">— / 2</div>
       <div class="pbar-bg"><div class="pbar-fill fill-velo" id="pbVelo" style="width:0%"></div></div>
     </div>
   </div>
@@ -283,7 +368,7 @@
   <div class="streak-card glass">
     <div class="s-fire">🔥</div>
     <div class="s-info">
-      <div class="s-num" id="streakNum">5</div>
+      <div class="s-num" id="streakNum">0</div>
       <div class="s-sub">jours consécutifs actifs</div>
     </div>
     <div class="s-days" id="streakDays"></div>
@@ -292,9 +377,18 @@
   <!-- STATS -->
   <div class="sec-label" style="margin-top:20px;">Statistiques</div>
   <div class="stats-row">
-    <div class="stat-card glass"><div class="stat-val" id="stSessions">12</div><div class="stat-lbl">Séances</div></div>
-    <div class="stat-card glass"><div class="stat-val" id="stHours">18h</div><div class="stat-lbl">Durée totale</div></div>
-    <div class="stat-card glass"><div class="stat-val" id="stKm">87 km</div><div class="stat-lbl">Vélo</div></div>
+    <div class="stat-card glass">
+      <div class="stat-val" id="stSessions">0</div>
+      <div class="stat-lbl">Séances</div>
+    </div>
+    <div class="stat-card glass">
+      <div class="stat-val" id="stHours">0h</div>
+      <div class="stat-lbl">Durée totale</div>
+    </div>
+    <div class="stat-card glass">
+      <div class="stat-val" id="stKm">0 km</div>
+      <div class="stat-lbl">Vélo</div>
+    </div>
   </div>
 
   <!-- GRAPHIQUE -->
@@ -309,7 +403,7 @@
       </div>
     </div>
     <div style="position:relative;width:100%;height:180px;">
-      <canvas id="chart1" role="img" aria-label="Graphique groupé du nombre de séances yoga pilates et vélo sur 4 semaines">Données sur 4 semaines.</canvas>
+      <canvas id="chart1" role="img" aria-label="Graphique du nombre de séances par activité sur les 4 dernières semaines">Données de progression sur 4 semaines.</canvas>
     </div>
   </div>
 
@@ -318,10 +412,11 @@
   <div class="sessions-card glass">
     <div class="sessions-head">
       <span class="sessions-title">Historique</span>
-      <span class="sessions-more">Voir tout →</span>
+      <span class="sessions-more" id="seeAllBtn" onclick="toggleAll()">Voir tout →</span>
     </div>
     <div id="sessionsList"></div>
   </div>
+
 </div>
 
 <!-- MODAL -->
@@ -373,201 +468,360 @@
     </div>
 
     <div class="f-group">
-      <span class="f-label">Notes</span>
-      <textarea class="f-input" id="inNotes" rows="2" placeholder="Programme, sensations..."></textarea>
+      <span class="f-label">Notes (optionnel)</span>
+      <textarea class="f-input" id="inNotes" rows="2" placeholder="Programme suivi, sensations particulières..."></textarea>
     </div>
 
-    <button class="save-btn" onclick="saveSession()">Enregistrer</button>
-    <div id="stravaZone" style="display:none">
-      <button class="strava-btn">Importer depuis Strava</button>
+    <div class="f-group">
+      <span class="f-label">Distance vélo (km, optionnel)</span>
+      <input type="number" class="f-input" id="inKm" placeholder="ex: 28" min="0" max="500">
     </div>
-    <span class="cancel" onclick="closeModal()">Annuler</span>
+
+    <button class="save-btn" onclick="saveSession()">Enregistrer la séance</button>
+
+    <div id="stravaZone" style="display:none">
+      <button class="strava-btn">🟠 Importer depuis Strava</button>
+    </div>
+
+    <span class="cancel-link" onclick="closeModal()">Annuler</span>
   </div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const SAMPLE=[
-  {id:1,type:'yoga',date:'2026-05-26',duration:50,intensity:3,ressenti:'🙂',notes:'Salutation au soleil'},
-  {id:2,type:'pilates',date:'2026-05-24',duration:45,intensity:4,ressenti:'😄',notes:'Gainage intense'},
-  {id:3,type:'velo',date:'2026-05-22',duration:90,intensity:4,ressenti:'🔥',notes:'28 km sortie matinale'},
-  {id:4,type:'pilates',date:'2026-05-21',duration:50,intensity:3,ressenti:'🙂',notes:''},
-  {id:5,type:'yoga',date:'2026-05-19',duration:60,intensity:2,ressenti:'😄',notes:'Yin yoga récupération'},
-  {id:6,type:'velo',date:'2026-05-17',duration:120,intensity:5,ressenti:'😴',notes:'59 km sortie longue'},
-  {id:7,type:'pilates',date:'2026-05-12',duration:45,intensity:3,ressenti:'🙂',notes:''},
-  {id:8,type:'yoga',date:'2026-05-10',duration:55,intensity:2,ressenti:'😄',notes:''},
-  {id:9,type:'velo',date:'2026-05-08',duration:75,intensity:4,ressenti:'🔥',notes:''},
-  {id:10,type:'pilates',date:'2026-05-05',duration:45,intensity:3,ressenti:'🙂',notes:''},
-  {id:11,type:'yoga',date:'2026-05-03',duration:60,intensity:2,ressenti:'😄',notes:''},
-  {id:12,type:'velo',date:'2026-05-01',duration:100,intensity:4,ressenti:'😄',notes:''},
-];
+  // ===== DATA =====
+  const SAMPLE = [
+    {id:1, type:'yoga',    date:'2026-05-26', duration:50,  intensity:3, ressenti:'🙂', notes:'Salutation au soleil', km:0},
+    {id:2, type:'pilates', date:'2026-05-24', duration:45,  intensity:4, ressenti:'😄', notes:'Gainage intense',      km:0},
+    {id:3, type:'velo',    date:'2026-05-22', duration:90,  intensity:4, ressenti:'🔥', notes:'Sortie matinale',      km:28},
+    {id:4, type:'pilates', date:'2026-05-21', duration:50,  intensity:3, ressenti:'🙂', notes:'',                    km:0},
+    {id:5, type:'yoga',    date:'2026-05-19', duration:60,  intensity:2, ressenti:'😄', notes:'Yin yoga récupération',km:0},
+    {id:6, type:'velo',    date:'2026-05-17', duration:120, intensity:5, ressenti:'😴', notes:'Sortie longue',        km:59},
+    {id:7, type:'pilates', date:'2026-05-12', duration:45,  intensity:3, ressenti:'🙂', notes:'',                    km:0},
+    {id:8, type:'yoga',    date:'2026-05-10', duration:55,  intensity:2, ressenti:'😄', notes:'',                    km:0},
+    {id:9, type:'velo',    date:'2026-05-08', duration:75,  intensity:4, ressenti:'🔥', notes:'',                    km:35},
+    {id:10,type:'pilates', date:'2026-05-05', duration:45,  intensity:3, ressenti:'🙂', notes:'',                    km:0},
+    {id:11,type:'yoga',    date:'2026-05-03', duration:60,  intensity:2, ressenti:'😄', notes:'',                    km:0},
+    {id:12,type:'velo',    date:'2026-05-01', duration:100, intensity:4, ressenti:'😄', notes:'',                    km:45},
+  ];
 
-let sessions=[], selAct=null, selInt=null, selRes=null;
-let chartInst=null, curTab='week';
+  const STORAGE_KEY = 'sport_tracker_v3';
+  const GOALS = { yoga:1, pilates:2, velo:2 };
+  const LABELS = { yoga:'Yoga', pilates:'Pilates', velo:'Vélo' };
+  const EMOJIS = { yoga:'🧘', pilates:'🤸', velo:'🚴' };
+  const TODAY = new Date().toISOString().split('T')[0];
 
-const labels={yoga:'Yoga',pilates:'Pilates',velo:'Vélo'};
-const emojis={yoga:'🧘',pilates:'🤸',velo:'🚴'};
+  let sessions = [];
+  let selAct = null, selInt = null, selRes = null;
+  let chartInst = null, curTab = 'week', showAll = false;
 
-async function load(){
-  try{const r=await window.storage.get('sport_v2');sessions=r?JSON.parse(r.value):SAMPLE;}
-  catch(e){sessions=SAMPLE;}
-  render();
-}
-async function persist(){
-  try{await window.storage.set('sport_v2',JSON.stringify(sessions));}catch(e){}
-}
-
-function weekOf(dateStr){
-  const d=new Date(dateStr),dow=d.getDay();
-  const mon=new Date(d);mon.setDate(d.getDate()-(dow||7)+1);mon.setHours(0,0,0,0);
-  return mon;
-}
-function getFiltered(tab){
-  const today='2026-05-27';
-  if(tab==='week'){
-    const mon=weekOf(today);
-    return sessions.filter(s=>new Date(s.date)>=mon);
+  // ===== STORAGE =====
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      sessions = raw ? JSON.parse(raw) : SAMPLE;
+    } catch(e) { sessions = SAMPLE; }
+    render();
   }
-  if(tab==='month') return sessions.filter(s=>s.date.startsWith('2026-05'));
-  return sessions;
-}
 
-function setTab(el,tab){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');curTab=tab;render();
-}
+  function saveData() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions)); } catch(e) {}
+  }
 
-function render(){
-  const f=getFiltered(curTab);
-  const yoga=f.filter(s=>s.type==='yoga').length;
-  const pilates=f.filter(s=>s.type==='pilates').length;
-  const velo=f.filter(s=>s.type==='velo').length;
-  const yG=1,pG=2,vG=2;
+  // ===== FILTERING =====
+  function getMonday(dateStr) {
+    const d = new Date(dateStr);
+    const dow = d.getDay();
+    const mon = new Date(d);
+    mon.setDate(d.getDate() - (dow || 7) + 1);
+    mon.setHours(0, 0, 0, 0);
+    return mon;
+  }
 
-  document.getElementById('gYoga').textContent=yoga+' / '+yG;
-  document.getElementById('gPilates').textContent=pilates+' / '+pG;
-  document.getElementById('gVelo').textContent=velo+' / '+vG;
-  document.getElementById('pbYoga').style.width=Math.min(100,Math.round(yoga/yG*100))+'%';
-  document.getElementById('pbPilates').style.width=Math.min(100,Math.round(pilates/pG*100))+'%';
-  document.getElementById('pbVelo').style.width=Math.min(100,Math.round(velo/vG*100))+'%';
-
-  const total=f.length;
-  const totalMin=f.reduce((a,s)=>a+s.duration,0);
-  const totalH=Math.round(totalMin/60);
-  const km=Math.round(f.filter(s=>s.type==='velo').reduce((a,s)=>a+(s.km||Math.round(s.duration/2)),0));
-
-  document.getElementById('stSessions').textContent=total;
-  document.getElementById('stHours').textContent=totalH+'h';
-  document.getElementById('stKm').textContent=km+' km';
-
-  const weekTotal=getFiltered('week').length;
-  const pct=Math.round(weekTotal/5*100);
-  document.getElementById('hTitle').textContent=weekTotal+' séance'+(weekTotal>1?'s':'')+' cette semaine';
-  document.getElementById('hSub').textContent='Objectif 5 · '+pct+'% accompli';
-  const ring=document.getElementById('mainRing');
-  const circ=2*Math.PI*25;
-  ring.style.strokeDasharray=circ;
-  ring.style.strokeDashoffset=circ-(circ*Math.min(1,weekTotal/5));
-
-  renderStreak();
-  renderSessions(f);
-  renderChart();
-}
-
-function renderStreak(){
-  const days=['L','M','M','J','V','S','D'];
-  const today=new Date('2026-05-27');
-  const dow=today.getDay();
-  const mon=new Date(today);mon.setDate(today.getDate()-(dow||7)+1);
-  const dates=Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d.toISOString().split('T')[0];});
-  const hasSess=new Set(sessions.map(s=>s.date));
-  const cont=document.getElementById('streakDays');cont.innerHTML='';
-  dates.forEach((dt,i)=>{
-    const div=document.createElement('div');div.className='s-day';
-    if(dt==='2026-05-27') div.classList.add('today');
-    else if(dt<'2026-05-27'&&hasSess.has(dt)) div.classList.add('done');
-    else div.classList.add('empty');
-    div.textContent=days[i];cont.appendChild(div);
-  });
-}
-
-function renderSessions(f){
-  const list=document.getElementById('sessionsList');
-  const sorted=[...f].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
-  list.innerHTML='';
-  if(!sorted.length){list.innerHTML='<div style="padding:18px;text-align:center;color:#9AA0BC;font-size:13px;">Aucune séance sur cette période</div>';return;}
-  sorted.forEach(s=>{
-    const d=document.createElement('div');d.className='s-item';
-    const dateStr=new Date(s.date).toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'});
-    const dots=[1,2,3,4,5].map(i=>`<div class="i-dot${i<=s.intensity?' on-'+s.type:''}"></div>`).join('');
-    d.innerHTML=`
-      <div class="s-badge b-${s.type}">${emojis[s.type]}</div>
-      <div>
-        <div class="s-name">${labels[s.type]}</div>
-        <div class="s-meta">${dateStr}${s.notes?' · '+s.notes.substring(0,28):''} ${s.ressenti}</div>
-      </div>
-      <div class="s-right">
-        <div class="s-dur">${s.duration} min</div>
-        <div class="i-dots">${dots}</div>
-      </div>`;
-    list.appendChild(d);
-  });
-}
-
-function renderChart(){
-  if(chartInst){chartInst.destroy();}
-  chartInst=new Chart(document.getElementById('chart1'),{
-    type:'bar',
-    data:{
-      labels:['S−3','S−2','S−1','Cette sem.'],
-      datasets:[
-        {label:'Yoga',data:[1,2,1,1],backgroundColor:'rgba(91,110,196,0.78)',borderRadius:6,borderSkipped:false},
-        {label:'Pilates',data:[2,1,2,1],backgroundColor:'rgba(226,114,91,0.78)',borderRadius:6,borderSkipped:false},
-        {label:'Vélo',data:[1,2,1,0],backgroundColor:'rgba(77,175,138,0.78)',borderRadius:6,borderSkipped:false},
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y}}},
-      scales:{
-        x:{stacked:false,grid:{display:false},ticks:{color:'#9AA0BC',font:{size:11}}},
-        y:{beginAtZero:true,max:4,ticks:{stepSize:1,color:'#9AA0BC',font:{size:11}},grid:{color:'rgba(190,195,216,0.25)'}}
-      }
+  function getFiltered(tab) {
+    if (tab === 'week') {
+      const mon = getMonday(TODAY);
+      return sessions.filter(s => new Date(s.date) >= mon);
     }
-  });
-}
+    if (tab === 'month') {
+      const ym = TODAY.substring(0, 7);
+      return sessions.filter(s => s.date.startsWith(ym));
+    }
+    return sessions;
+  }
 
-function openModal(){
-  selAct=null;selInt=null;selRes=null;
-  document.getElementById('inDate').value='2026-05-27';
-  document.getElementById('inDur').value='';
-  document.getElementById('inNotes').value='';
-  document.getElementById('stravaZone').style.display='none';
-  document.querySelectorAll('.act-pill').forEach(p=>p.className='act-pill');
-  document.querySelectorAll('.int-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.res-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('modalWrap').classList.add('open');
-}
-function closeModal(){document.getElementById('modalWrap').classList.remove('open');}
-function clickOutside(e){if(e.target===document.getElementById('modalWrap'))closeModal();}
+  // ===== RENDER =====
+  function render() {
+    renderHeader();
+    renderGoals();
+    renderStreak();
+    renderStats();
+    renderChart();
+    renderSessions();
+  }
 
-function pickAct(t,el){
-  selAct=t;
-  document.querySelectorAll('.act-pill').forEach(p=>p.className='act-pill');
-  el.classList.add('sel-'+t);
-  document.getElementById('stravaZone').style.display=t==='velo'?'block':'none';
-}
-function pickInt(n,el){selInt=n;document.querySelectorAll('.int-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
-function pickRes(r,el){selRes=r;document.querySelectorAll('.res-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+  function renderHeader() {
+    const d = new Date();
+    const opts = { weekday:'long', day:'numeric', month:'long' };
+    document.getElementById('hDate').textContent = d.toLocaleDateString('fr-FR', opts);
 
-function saveSession(){
-  if(!selAct){alert('Choisis une activité');return;}
-  const date=document.getElementById('inDate').value;
-  const dur=parseInt(document.getElementById('inDur').value);
-  if(!date||!dur){alert('Date et durée requises');return;}
-  sessions.unshift({id:Date.now(),type:selAct,date,duration:dur,intensity:selInt||3,ressenti:selRes||'🙂',notes:document.getElementById('inNotes').value});
-  persist();closeModal();render();
-}
+    const weekSessions = getFiltered('week');
+    const total = weekSessions.length;
+    const totalGoal = GOALS.yoga + GOALS.pilates + GOALS.velo;
+    const pct = Math.round(total / totalGoal * 100);
 
-load();
+    document.getElementById('hTitle').textContent = total + ' séance' + (total > 1 ? 's' : '') + ' cette semaine';
+    document.getElementById('hSub').textContent = 'Objectif ' + totalGoal + ' · ' + pct + '% accompli';
+
+    const circ = 2 * Math.PI * 26;
+    const ring = document.getElementById('mainRing');
+    ring.style.strokeDasharray = circ;
+    ring.style.strokeDashoffset = circ - (circ * Math.min(1, total / totalGoal));
+  }
+
+  function renderGoals() {
+    const f = getFiltered(curTab);
+    ['yoga', 'pilates', 'velo'].forEach(t => {
+      const count = f.filter(s => s.type === t).length;
+      const goal = GOALS[t];
+      const pct = Math.min(100, Math.round(count / goal * 100));
+      document.getElementById('g' + cap(t)).textContent = count + ' / ' + goal;
+      document.getElementById('pb' + cap(t)).style.width = pct + '%';
+    });
+  }
+
+  function renderStreak() {
+    const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+    const today = new Date(TODAY);
+    const dow = today.getDay();
+    const mon = new Date(today);
+    mon.setDate(today.getDate() - (dow || 7) + 1);
+
+    const weekDates = Array.from({length: 7}, (_, i) => {
+      const d = new Date(mon);
+      d.setDate(mon.getDate() + i);
+      return d.toISOString().split('T')[0];
+    });
+
+    const hasSess = new Set(sessions.map(s => s.date));
+    const cont = document.getElementById('streakDays');
+    cont.innerHTML = '';
+
+    weekDates.forEach((dt, i) => {
+      const div = document.createElement('div');
+      div.className = 's-day';
+      if (dt === TODAY) div.classList.add('today');
+      else if (dt < TODAY && hasSess.has(dt)) div.classList.add('done');
+      else div.classList.add('empty');
+      div.textContent = days[i];
+      cont.appendChild(div);
+    });
+
+    // Calcul streak consécutif
+    let streak = 0;
+    const sorted = [...new Set(sessions.map(s => s.date))].sort((a, b) => b.localeCompare(a));
+    let prev = TODAY;
+    for (const d of sorted) {
+      const diff = (new Date(prev) - new Date(d)) / 86400000;
+      if (diff <= 1) { streak++; prev = d; }
+      else break;
+    }
+    document.getElementById('streakNum').textContent = streak;
+  }
+
+  function renderStats() {
+    const f = getFiltered(curTab);
+    const totalMin = f.reduce((a, s) => a + s.duration, 0);
+    const km = f.filter(s => s.type === 'velo').reduce((a, s) => a + (s.km || 0), 0);
+    document.getElementById('stSessions').textContent = f.length;
+    document.getElementById('stHours').textContent = Math.round(totalMin / 60) + 'h';
+    document.getElementById('stKm').textContent = Math.round(km) + ' km';
+  }
+
+  function renderChart() {
+    // Build last 4 weeks data
+    const weekLabels = ['S−3', 'S−2', 'S−1', 'Cette sem.'];
+    const yogaData = [], pilatesData = [], veloData = [];
+
+    for (let w = 3; w >= 0; w--) {
+      const ref = new Date(TODAY);
+      ref.setDate(ref.getDate() - w * 7);
+      const mon = getMonday(ref.toISOString().split('T')[0]);
+      const sun = new Date(mon); sun.setDate(mon.getDate() + 6); sun.setHours(23,59,59,999);
+      const wk = sessions.filter(s => {
+        const d = new Date(s.date);
+        return d >= mon && d <= sun;
+      });
+      yogaData.push(wk.filter(s => s.type === 'yoga').length);
+      pilatesData.push(wk.filter(s => s.type === 'pilates').length);
+      veloData.push(wk.filter(s => s.type === 'velo').length);
+    }
+
+    if (chartInst) { chartInst.destroy(); }
+    chartInst = new Chart(document.getElementById('chart1'), {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [
+          { label: 'Yoga',    data: yogaData,    backgroundColor: 'rgba(91,110,196,0.78)', borderRadius: 6, borderSkipped: false },
+          { label: 'Pilates', data: pilatesData, backgroundColor: 'rgba(226,114,91,0.78)', borderRadius: 6, borderSkipped: false },
+          { label: 'Vélo',    data: veloData,    backgroundColor: 'rgba(77,175,138,0.78)', borderRadius: 6, borderSkipped: false },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: c => c.dataset.label + ' : ' + c.parsed.y + ' séance(s)' } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#9AA0BC', font: { size: 11 } } },
+          y: { beginAtZero: true, max: Math.max(4, ...yogaData, ...pilatesData, ...veloData) + 1,
+               ticks: { stepSize: 1, color: '#9AA0BC', font: { size: 11 } },
+               grid: { color: 'rgba(190,195,216,0.25)' } }
+        }
+      }
+    });
+  }
+
+  function renderSessions() {
+    const f = getFiltered(curTab);
+    const list = document.getElementById('sessionsList');
+    const sorted = [...f].sort((a, b) => b.date.localeCompare(a.date));
+    const displayed = showAll ? sorted : sorted.slice(0, 5);
+
+    list.innerHTML = '';
+    if (!displayed.length) {
+      list.innerHTML = '<div class="empty">Aucune séance sur cette période</div>';
+      return;
+    }
+
+    displayed.forEach(s => {
+      const d = document.createElement('div');
+      d.className = 's-item';
+      const dateStr = new Date(s.date).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+      const dots = [1,2,3,4,5].map(i => `<div class="i-dot${i <= s.intensity ? ' on-' + s.type : ''}"></div>`).join('');
+      const noteTxt = s.notes ? ' · ' + s.notes.substring(0, 25) + (s.notes.length > 25 ? '…' : '') : '';
+      const kmTxt = s.type === 'velo' && s.km ? ' · ' + s.km + ' km' : '';
+      d.innerHTML = `
+        <div class="s-badge b-${s.type}">${EMOJIS[s.type]}</div>
+        <div style="flex:1;min-width:0">
+          <div class="s-name">${LABELS[s.type]}</div>
+          <div class="s-meta">${dateStr}${kmTxt}${noteTxt} ${s.ressenti}</div>
+        </div>
+        <div class="s-right">
+          <div class="s-dur">${s.duration} min</div>
+          <div class="i-dots">${dots}</div>
+        </div>`;
+      list.appendChild(d);
+    });
+
+    const btn = document.getElementById('seeAllBtn');
+    if (sorted.length > 5) {
+      btn.style.display = 'block';
+      btn.textContent = showAll ? '← Réduire' : 'Voir tout (' + sorted.length + ') →';
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
+  // ===== TABS =====
+  function setTab(el, tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    curTab = tab; showAll = false;
+    render();
+  }
+
+  function toggleAll() {
+    showAll = !showAll;
+    renderSessions();
+  }
+
+  // ===== MODAL =====
+  function openModal() {
+    selAct = null; selInt = null; selRes = null;
+    document.getElementById('inDate').value = TODAY;
+    document.getElementById('inDur').value = '';
+    document.getElementById('inNotes').value = '';
+    document.getElementById('inKm').value = '';
+    document.getElementById('stravaZone').style.display = 'none';
+    document.querySelectorAll('.act-pill').forEach(p => p.className = 'act-pill');
+    document.querySelectorAll('.int-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('modalWrap').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalWrap').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function clickOutside(e) {
+    if (e.target === document.getElementById('modalWrap')) closeModal();
+  }
+
+  function pickAct(t, el) {
+    selAct = t;
+    document.querySelectorAll('.act-pill').forEach(p => p.className = 'act-pill');
+    el.classList.add('sel-' + t);
+    document.getElementById('stravaZone').style.display = t === 'velo' ? 'block' : 'none';
+    document.getElementById('inKm').parentElement.style.display = t === 'velo' ? 'block' : 'none';
+  }
+
+  function pickInt(n, el) {
+    selInt = n;
+    document.querySelectorAll('.int-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function pickRes(r, el) {
+    selRes = r;
+    document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function saveSession() {
+    if (!selAct) { showToast('⚠️ Choisis une activité'); return; }
+    const date = document.getElementById('inDate').value;
+    const dur = parseInt(document.getElementById('inDur').value);
+    if (!date || !dur || dur < 1) { showToast('⚠️ Date et durée requises'); return; }
+    const km = parseFloat(document.getElementById('inKm').value) || 0;
+    const s = {
+      id: Date.now(),
+      type: selAct,
+      date, duration: dur,
+      intensity: selInt || 3,
+      ressenti: selRes || '🙂',
+      notes: document.getElementById('inNotes').value.trim(),
+      km
+    };
+    sessions.unshift(s);
+    saveData();
+    closeModal();
+    render();
+    showToast('✓ Séance enregistrée !');
+  }
+
+  // ===== TOAST =====
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ===== UTILS =====
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // ===== INIT =====
+  // Masquer le champ km par défaut
+  document.getElementById('inKm').parentElement.style.display = 'none';
+  loadData();
 </script>
+</body>
+</html>
